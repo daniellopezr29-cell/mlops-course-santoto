@@ -1,26 +1,26 @@
-# Pipeline MLOps Reproducible - Clasificación Iris (Semana 2)
+# Pipeline MLOps Reproducible - Clasificación Iris (Semanas 1 y 2)
 
-**Especialización en Ciencia de Datos - Universidad Santo Tomás**
-**Autor:** Daniel Ricardo López Rodríguez
+**Especialización en Ciencia de Datos - Universidad Santo Tomás (Seminario de Grado II)**  
+**Autor:** Daniel Ricardo López Rodríguez  
 
-## 1. Estructura del Proyecto
-- `run_pipeline.py` / `Makefile` / `dvc.yaml`: Automatización del flujo completo con un solo comando.
-- `src/prepare.py`: Preparación y división reproducible (80/20) del dataset Iris.
-- `src/validate_data.py`: Validación nativa en Python (sin librerías externas) de tipos, ausencia de nulos y rangos lógicos.
-- `data_contract.json`: Contrato de Datos oficial para inferencia (incluye ejemplo válido e inválido).
-- `src/train.py`: Entrenamiento del modelo Random Forest (`n_estimators=50, max_depth=3`), registro en MLflow y serialización en `models/model.pkl`.
-- `tests/test_model.py`: Pruebas unitarias automatizadas con `pytest` (`accuracy > 0.8`).
+Este repositorio implementa un flujo de **MLOps** reproducible para el entrenamiento, validación de datos, control de calidad y registro de un clasificador `RandomForestClassifier` sobre el dataset Iris, integrando **MLflow**, **DVC**, validación nativa de Contratos de Datos y pruebas automatizadas con **pytest**.
 
-## 2. Instrucciones de Reproducción desde Cero
-1. Clonar el repositorio:
-   git clone <URL_DEL_REPOSITORIO>
-   cd <NOMBRE_DEL_REPOSITORIO>
+---
 
-2. Crear entorno virtual e instalar dependencias:
-   python -m venv venv
-   source venv/bin/activate  # En Windows: venv\Scripts\activate
-   pip install -r requirements.txt
+## 1. Arquitectura y Archivos del Proyecto
 
-3. Ejecutar el pipeline completo (preparación, validación, entrenamiento y testing) con un solo comando:
-   python run_pipeline.py
-   # Alternativamente: make all  o  dvc repro
+```text
+mlops-course-santoto/
+├── run_pipeline.py             # Orquestador en un solo comando (python run_pipeline.py)
+├── Makefile                    # Automatización por consola (make all)
+├── dvc.yaml                    # Pipeline declarativo con DVC (prepare -> validate -> train -> test)
+├── data_contract.json          # Contrato de Datos oficial en JSON (ejemplo válido e inválido)
+├── requirements.txt            # Dependencias completas del stack MLOps
+├── src/
+│   ├── prepare.py              # Ingesta de Iris y división reproducible 80/20 (random_state=42)
+│   ├── validate_data.py        # Validador en Python puro (sin librerías externas)
+│   └── train.py                # Entrenamiento (n_estimators=50, max_depth=3), MLflow y models/model.pkl
+├── tests/
+│   └── test_model.py           # 5 pruebas automatizadas con pytest (accuracy > 0.80)
+├── data/processed/             # Datasets generados (train.csv y test.csv)
+└── models/                     # Modelo serializado (model.pkl)
