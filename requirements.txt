@@ -1,0 +1,9 @@
+mlflow
+scikit-learn
+fastapi
+uvicorn
+dvc
+pytest
+great-expectations
+pandas
+joblib
