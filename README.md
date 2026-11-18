@@ -13,7 +13,14 @@
 
 ## 2. Instrucciones de Reproducción desde Cero
 1. Clonar el repositorio:
-   ```bash
    git clone <URL_DEL_REPOSITORIO>
    cd <NOMBRE_DEL_REPOSITORIO>
-   ```
+
+2. Crear entorno virtual e instalar dependencias:
+   python -m venv venv
+   source venv/bin/activate  # En Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+
+3. Ejecutar el pipeline completo (preparación, validación, entrenamiento y testing) con un solo comando:
+   python run_pipeline.py
+   # Alternativamente: make all  o  dvc repro
